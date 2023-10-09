@@ -12,15 +12,18 @@ public class move : MonoBehaviour
     public float WalkSpeed = 2f;
     public float RotateSpeed;
     
-    private CharacterController controller;
-    private Vector3 moveDirection;
+    public CharacterController controller;
+    public Vector3 moveDirection;
     private Vector3 velocity;
     
-    private bool isGrounded;
+    public bool isGrounded;
     public float groundCheckDistance = 0.4f;
     public float gravity = -9.8f;
     public LayerMask groundMask;
     public float jumpHeight = 3f;
+    
+    
+    
     
     private Animation _animation;
     void Start()
@@ -31,8 +34,10 @@ public class move : MonoBehaviour
         groundMask = LayerMask.GetMask("ground");
         
         _animation = GetComponent<Animation>();
+        
+        
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -46,11 +51,7 @@ public class move : MonoBehaviour
         
         isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
 
-        if (isGrounded)
-        {
-            Debug.Log("isGrounded");
-        }
-
+        
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -60,8 +61,21 @@ public class move : MonoBehaviour
        
         var moveZ = Input.GetAxis("Vertical");
         var moveX = Input.GetAxis("Horizontal");
+        
+        
+
         moveDirection = new Vector3(moveX, 0, moveZ);
-        moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection.Normalize();
+        // moveDirection = transform.TransformDirection(moveDirection);
+        if (moveDirection != Vector3.zero)
+        {
+            transform.forward = moveDirection;
+        }
+
+        
+
+        
+        
 
         if (isGrounded)
         {
@@ -109,11 +123,12 @@ public class move : MonoBehaviour
 
         moveDirection *= moveSpeed;
         controller.Move(moveDirection * Time.deltaTime);
-
         
+       
         
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
         
         
 
