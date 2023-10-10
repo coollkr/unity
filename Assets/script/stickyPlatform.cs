@@ -1,3 +1,12 @@
+/*
+ * this is assignment for CSCI 4168 Game design
+ *
+ * Name: Kairui Liang B00861227
+ *
+ * this is to help to stick player on the platform.
+ *
+ *  
+ */
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,20 +14,26 @@ using UnityEngine;
 
 public class sti : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject player;
     
-
-    // Update is called once per frame
-    private void OnCollisionEnter(Collision collision)
+    
+    //trigger for if player on the board let player be child of platform. 
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "Lerpz")
+        if (collision.gameObject == player)
         {
             collision.gameObject.transform.SetParent(transform);
         }
     }
-
-    private void OnCollisionExit(Collision collision)
+    //If player go away, let relation break.
+    private void OnTriggerExit(Collider collision)
     {
-        collision.gameObject.transform.SetParent(null);
+        if (collision.gameObject == player)
+        {
+            collision.gameObject.transform.SetParent(null);
+        }
     }
+    
+    
+    
 }

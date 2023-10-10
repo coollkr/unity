@@ -1,3 +1,14 @@
+/*
+ * this is assignment for CSCI 4168 Game design
+ *
+ * Name: Kairui Liang B00861227
+ *
+ * this a camera follow script.
+ *
+ * this script will help camera follow the character without cinemachine.
+ *
+ * 
+ */
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,11 +24,13 @@ public class follow : MonoBehaviour
 
     private void Awake()
     {
+        //find player to track
         targetObject = GameObject.Find("Lerpz").transform;
     }
 
     void Start()
     {
+        //the distance between character and camera, and it cannot be changed.
         camerOffset = transform.position - targetObject.transform.position;
         
     }

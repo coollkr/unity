@@ -1,3 +1,14 @@
+/*
+ * this is assignment for CSCI 4168 Game design
+ *
+ * Name: Kairui Liang B00861227
+ *
+ * this a mouse look.
+ *
+ * this script will help mouse to change the direction.
+ *
+ * no used in this assignment.
+ */
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,6 +40,7 @@ public class mouselook : MonoBehaviour
 
     }
 
+    
     private void Rotate()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;

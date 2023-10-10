@@ -1,3 +1,14 @@
+/*
+ * this is assignment for CSCI 4168 Game design
+ *
+ * Name: Kairui Liang B00861227
+ *
+ * this is to help player move .
+ *
+ * this script is character controller for player.
+ *
+ * 
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,10 +49,10 @@ public class move : MonoBehaviour
         
     }
     
-    // Update is called once per frame
+    
     void Update()
     {
-        // _animation.Play("idle");
+        //call move function
         Move();
         
     }
@@ -66,7 +77,7 @@ public class move : MonoBehaviour
 
         moveDirection = new Vector3(moveX, 0, moveZ);
         moveDirection.Normalize();
-        // moveDirection = transform.TransformDirection(moveDirection);
+        
         if (moveDirection != Vector3.zero)
         {
             transform.forward = moveDirection;
@@ -76,7 +87,7 @@ public class move : MonoBehaviour
 
         
         
-
+        // only is ground then we can move.
         if (isGrounded)
         {
             
@@ -103,7 +114,7 @@ public class move : MonoBehaviour
                 Jump();
                 
             }
-
+            
             if (!_animation.isPlaying)
             {
                 _animation.Play("idle");
@@ -113,7 +124,7 @@ public class move : MonoBehaviour
         }
 
        
-
+        // if player is not on the ground.
         else if (!isGrounded)
         {
             _animation.Play("jumpFall");
@@ -134,6 +145,8 @@ public class move : MonoBehaviour
 
     }
     
+    
+    //movement function or change speed when walking or Running.
     private void Walk()
     {
         moveSpeed = WalkSpeed;
@@ -143,7 +156,7 @@ public class move : MonoBehaviour
     {
         moveSpeed = RunSpeed;
     }
-
+    
     private void Jump()
     {
         velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);

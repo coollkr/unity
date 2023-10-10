@@ -1,3 +1,14 @@
+/*
+ * this is assignment for CSCI 4168 Game design
+ *
+ * Name: Kairui Liang B00861227
+ *
+ * this is to track player's health.
+ *
+ * this script will store the player's current health.
+ *
+ * 
+ */
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +28,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Transform respawnPoint;
     void Start()
     {
-        // Health playerHealth = new Health(maxHealth);
+        
         currentHealth = maxHealth;
         
         HealthBar.SetHealth(maxHealth);
@@ -27,6 +38,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Update()
     {
+        //K for get damage and L for get heal just for cheat code in this game.
         if (Input.GetKeyDown(KeyCode.K))
         {
             TakeDamage(20);
@@ -36,7 +48,8 @@ public class NewBehaviourScript : MonoBehaviour
             getHeal(20);
         }
     }
-
+    
+    //take damage from coppers
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -45,6 +58,7 @@ public class NewBehaviourScript : MonoBehaviour
         HealthBar.SetHealth(currentHealth);
     }
     
+    //get heal function.
     void getHeal(int heal)
      {
          currentHealth += heal;
@@ -53,10 +67,10 @@ public class NewBehaviourScript : MonoBehaviour
          HealthBar.SetHealth(currentHealth);
      }
 
-
+    // if player die, them the game will restart.
     void die()
     {
-        // Application.LoadLevel(Application.loadedLevel);
+        
         SceneManager.LoadScene(0);
     }
 }

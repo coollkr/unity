@@ -1,3 +1,14 @@
+/*
+ * this is assignment for CSCI 4168 Game design
+ *
+ * Name: Kairui Liang B00861227
+ *
+ * this a script for Enemy AI，
+ *
+ * Here AI will detect the distance between they and player, if distance is too close, they will give you a damage.
+ *
+ * and chase you.
+ */
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +18,7 @@ using UnityEngine.UIElements;
 
 public class police : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
 
 
     public Transform player;
@@ -38,7 +49,7 @@ public class police : MonoBehaviour
         distance = Vector3.Distance(transform.position, player.position);
         
         
-        
+        //gravity part
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -53,7 +64,7 @@ public class police : MonoBehaviour
         
         if (distance <= 2f)
         {
-            //give damage to player
+            //give damage to player with time interval (2 second per attack, and each attack is -20 damage)
             if (Time.time - _lastAttackTime >= attackCooldown)
             {
                 damage();
@@ -63,24 +74,23 @@ public class police : MonoBehaviour
             
         }
         
-        
+        //gravity part
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
         
     }
 
-
+    //chase function
     void Chase()
     {
             Vector3 newVector =  player.position - transform.position ;
         
             controller.transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-            // controller.transform.LookAt();
-            // transform.Translate(0,0, speed * Time.deltaTime);
             controller.Move(newVector * speed * Time.deltaTime);
         
     }
-
+    
+    //damage function
     void damage()
     {
         GameObject.FindGameObjectWithTag("GameController").GetComponent<NewBehaviourScript>().TakeDamage(20);
