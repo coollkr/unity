@@ -1,7 +1,4 @@
 # unity
-assignment for CSCI4168 game design course in dalhousie.
-
-Name: Kairui Liang.  B00861127
 
 for first level. Our mission is to reach the last platform and get close to the red heart.
 
